@@ -1,1 +1,20 @@
+name: 96 - Copy labels
 
+env:
+  GH_TOKEN: ${{ github.token }}
+  SOURCE_REPO: ucsb-cs156/labelmaker
+on:
+  workflow_dispatch:
+jobs:
+  createOneOffIssues:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get labels from source repo
+        continue-on-error: true
+        run: |
+           gh api \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              /repos/${{env.SOURCE_REPO}}/labels
