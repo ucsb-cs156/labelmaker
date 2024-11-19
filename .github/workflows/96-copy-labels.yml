@@ -6,8 +6,10 @@ env:
 on:
   workflow_dispatch:
 jobs:
-  createOneOffIssues:
+  getLabels:
     runs-on: ubuntu-latest
+    outputs:
+      labels: ${{ steps.get-prs.outputs.labels }}
 
     steps:
       - uses: actions/checkout@v4
@@ -17,4 +19,9 @@ jobs:
            gh api \
               -H "Accept: application/vnd.github+json" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
-              /repos/${{env.SOURCE_REPO}}/labels
+              /repos/${{env.SOURCE_REPO}}/labels > labels.json
+
+           cat labels.json
+           labels=`cat labels.json`
+           echo "labels=${labels}"
+           echo "label=${labels}" >> "$GITHUB_OUTPUT"
