@@ -10,7 +10,7 @@ jobs:
     name: Get Labels
     runs-on: ubuntu-latest
     outputs:
-      labels: ${{ steps.get-prs.outputs.labels }}
+      labels: ${{ steps.get-labels.outputs.labels }}
 
     steps:
       - uses: actions/checkout@v4
