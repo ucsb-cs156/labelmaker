@@ -22,7 +22,10 @@ jobs:
               -H "X-GitHub-Api-Version: 2022-11-28" \
               /repos/${{env.SOURCE_REPO}}/labels > labels.json
 
+           echo "cat labels.json output follows"
            cat labels.json
+           echo "cat labels.json output done"
+
            LABELS=`cat labels.json`
            echo "LABELS=${LABELS}"
            echo "LABELS=$LABELS" >> $GITHUB_OUTPUT
