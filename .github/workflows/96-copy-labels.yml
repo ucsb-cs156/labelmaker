@@ -25,7 +25,7 @@ jobs:
            cat labels.json
            labels=`cat labels.json`
            echo "labels=${labels}"
-           echo "label=${labels}" >> "$GITHUB_OUTPUT"
+           echo "labels=${labels}" >> "$GITHUB_OUTPUT"
 
   create-labels:
     name: Create Labels
@@ -40,5 +40,6 @@ jobs:
       - name: Create labels in destination repo
         continue-on-error: true
         run: |
+          echo labels=${{ needs.get-labels.outputs.labels }}
           echo matrix-value: ${{ matrix.value }}
  
