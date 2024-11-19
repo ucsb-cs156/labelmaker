@@ -38,14 +38,13 @@ jobs:
     env:
       LABELS: ${{ needs.get-labels.outputs.LABELS }}
 
-    # strategy:
-    #   matrix:
-    #     value: ${{ fromJSON(needs.get-labels.outputs.labels) }}    
+    strategy:
+      matrix:
+        value: ${{ fromJSON(needs.get-labels.outputs.labels) }}    
     steps:
       - uses: actions/checkout@v4
       - name: Create labels in destination repo
         continue-on-error: true
         run: |
-          echo LABELS=${{ env.LABELS }}
-          # echo matrix-value: ${{ matrix.value }}
+          echo matrix-value: ${{ matrix.value }}
  
