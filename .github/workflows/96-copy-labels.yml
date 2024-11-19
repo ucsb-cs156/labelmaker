@@ -35,12 +35,11 @@ jobs:
     name: Create Labels
     runs-on: ubuntu-latest
     needs: [get-labels]   
-    env:
-      LABELS: ${{ needs.get-labels.outputs.LABELS }}
+    if: ${{ needs.get-labels.outputs.LABELS != '[]' && needs.get-labels.outputs.LABELS != '' }}
 
     strategy:
       matrix:
-        value: ${{ fromJSON(needs.get-labels.outputs.labels) }}    
+        value: ${{ fromJSON(needs.get-labels.outputs.LABELS) }}    
     steps:
       - uses: actions/checkout@v4
       - name: Create labels in destination repo
